@@ -21,24 +21,23 @@ function createDiv() {
         box-shadow:0 0 6px rgba(0,0,0,0.2);
     `;
     document.body.appendChild(newDiv);
-    setTimeout(() => newDiv.remove(), 3000);
+    setTimeout(() => newDiv.remove(), 5000);
     
-    console.log("Div created by triple right-click!");
+    console.log("Div created by triple left-click!");
 }
 
 function resetClickCounter() {
     rightClickCount = 0;
-    console.log("Right-click counter reset");
+    console.log("Left-click counter reset");
 }
 
-// Add event listener for right-click (contextmenu event)
-document.addEventListener('contextmenu', function(e) {
-    // Prevent the context menu from appearing
-    e.preventDefault();
+// Add event listener for left-click (click event)
+document.addEventListener('click', function(e) {
+    // No need to prevent default for left-click
     
     // Increment click counter
     rightClickCount++;
-    console.log(`Right-click count: ${rightClickCount}`);
+    console.log(`Left-click count: ${rightClickCount}`);
     
     // Clear existing timer
     if (rightClickTimer) {
@@ -55,4 +54,4 @@ document.addEventListener('contextmenu', function(e) {
     }
 });
 
-console.log("Right-click listener added. Right-click 3 times to create div!");
+console.log("Left-click listener added. Left-click 3 times to create div!");
