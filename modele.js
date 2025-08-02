@@ -23,35 +23,29 @@ function createDiv() {
     document.body.appendChild(newDiv);
     setTimeout(() => newDiv.remove(), 5000);
     
-    console.log("Div created by triple left-click!");
+    console.log("Div created by Shift+Z!");
 }
 
-function resetClickCounter() {
-    rightClickCount = 0;
-    console.log("Left-click counter reset");
-}
-
-// Add event listener for left-click (click event)
-document.addEventListener('click', function(e) {
-    // No need to prevent default for left-click
-    
-    // Increment click counter
-    rightClickCount++;
-    console.log(`Left-click count: ${rightClickCount}`);
-    
-    // Clear existing timer
-    if (rightClickTimer) {
-        clearTimeout(rightClickTimer);
+// Add event listeners for keyboard shortcuts
+document.addEventListener('keydown', function(e) {
+    // Track if Shift is pressed
+    if (e.key === 'Shift') {
+        shiftPressed = true;
     }
     
-    // Check if we've reached the required number of clicks
-    if (rightClickCount >= REQUIRED_CLICKS) {
+    // Check for Shift+Z combination
+    if (e.shiftKey && (e.key === 'z' || e.key === 'Z')) {
+        e.preventDefault(); // Prevent any default browser behavior
         createDiv();
-        resetClickCounter();
-    } else {
-        // Set timer to reset counter if no more clicks
-        rightClickTimer = setTimeout(resetClickCounter, CLICK_TIMEOUT);
+        console.log("Shift+Z pressed!");
     }
 });
 
-console.log("Left-click listener added. Left-click 3 times to create div!");
+document.addEventListener('keyup', function(e) {
+    // Track when Shift is released
+    if (e.key === 'Shift') {
+        shiftPressed = false;
+    }
+});
+
+console.log("Keyboard listener added. Press Shift+Z to create div!");
