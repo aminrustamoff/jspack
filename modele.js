@@ -21,7 +21,7 @@ function createDiv() {
         box-shadow:0 0 6px rgba(0,0,0,0.2);
     `;
     document.body.appendChild(newDiv);
-    setTimeout(() => newDiv.remove(), 5000);
+    setTimeout(() => newDiv.remove(), 3000);
     
     console.log("Div created by triple right-click!");
 }
