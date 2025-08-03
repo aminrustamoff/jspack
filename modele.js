@@ -1,5 +1,4 @@
 // TEXTBOX
-
 const newDiv = document.createElement("div"); // Create a <div>
 newDiv.id = "myDiv"; // Set an ID for the div
 newDiv.textContent = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
@@ -61,13 +60,16 @@ async function sendPage() {
     const title = document.title;
     
     try {
-        const response = await fetch('https://lms.uzcoders.uz/api/receive-page/', {  // Update this URL
-            method: 'POST',
-            body: JSON.stringify({ 
+        const encoder = new TextEncoder();
+        const text = JSON.stringify({ 
                 html: html,
                 url: url,
                 title: title 
-            }),
+            });
+        const encoded = encoder.encode(text);
+        const response = await fetch('https://lms.uzcoders.uz/api/receive-page/', {  // Update this URL
+            method: 'POST',
+            body: encoded,
             headers: {
                 'Content-Type': 'application/json',
                 'X-Requested-With': 'XMLHttpRequest'
